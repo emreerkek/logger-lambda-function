@@ -11,7 +11,7 @@ exports.handler = async (event) => {
     if (event.queryStringParameters && event.queryStringParameters.greeting) {
     let response = {
            statusCode: 200, 
-            body: "Hello " event.queryStringParameters.greeting
+            body: "Hello "+ event.queryStringParameters.greeting
         };
         return response;
     }
