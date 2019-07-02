@@ -1,17 +1,18 @@
-exports.handler = function(event, context, callback) {
-    var res ={
-        "statusCode": 200,
-        "headers": {
-            "Content-Type": "*/*"
-        }
-    };
-    if (event.greeter==null) {
-        callback(new Error('Missing the required greeter parameter.'));
-    } else if (event.greeter === "") {
-        res.body = "Hello, World";
-        callback(null, res);
-    } else {
-        res.body = "Hello, " + event.greeter +"!";
-        callback(null, res);
+'use strict';
+
+exports.handler = async (event) => {
+    let name = "you";
+    let city = 'World';
+    let time = 'day';
+    let day = '';
+    let responseCode = 200;
+    console.log("request: " + JSON.stringify(event));
+    
+    if (event.queryStringParameters && event.queryStringParameters.greeting) {
+    let response = {
+           statusCode: 200, 
+            body: "Hello " event.queryStringParameters.greeting
+        };
+        return response;
     }
 };
