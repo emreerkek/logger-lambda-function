@@ -1,5 +1,17 @@
-exports.handler = async function(event, context) {
-  console.log("ENVIRONMENT VARIABLES\n" + JSON.stringify(process.env, null, 2))
-  console.log("EVENT\n" + JSON.stringify(event, null, 2))
-  return context.logStreamName
-}
+exports.handler = function(event, context, callback) {
+    var res ={
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "*/*"
+        }
+    };
+    if (event.greeter==null) {
+        callback(new Error('Missing the required greeter parameter.'));
+    } else if (event.greeter === "") {
+        res.body = "Hello, World";
+        callback(null, res);
+    } else {
+        res.body = "Hello, " + event.greeter +"!";
+        callback(null, res);
+    }
+};
